@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)   # 実装は終わっていないことに注意!
     if @user.save
+      log_in @user
       redirect_to @user
     else
       render 'new'
@@ -19,7 +20,7 @@ class UsersController < ApplicationController
   private
 	
     def user_params
-      params.require(:user).permit(:name, :email)
+      params.require(:user).permit(:name, :email,:password,:password_confirmation)
     end
 end
 
